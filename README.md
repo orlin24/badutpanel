@@ -15,7 +15,7 @@ badutstream
    Buka terminal di VPS Anda dan jalankan perintah berikut untuk meng-clone repositori:
 
    ```bash
-   wget -O installer.sh https://raw.githubusercontent.com/orlin24/badutstream/main/installer.sh
+   wget -O installer.sh https://raw.githubusercontent.com/orlin24/badutpanel/refs/heads/main/installer.sh
    ```
    ```bash
    chmod +x installer.sh
