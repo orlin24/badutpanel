@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Daftar Lisensi</h1>
+<a href="/admin/license/new" class="btn btn-primary mb-3">Tambah Lisensi</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>IP Address</th>
+            <th>License Key</th>
+            <th>Active Until</th>
+            <th>Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for license in licenses %}
+        <tr>
+            <td>{{ license.id }}</td>
+            <td>{{ license.ip_address }}</td>
+            <td>{{ license.license_key }}</td>
+            <td>{{ license.active_until }}</td>
+            <td>
+                <a href="/admin/license/{{ license.id }}/edit" class="btn btn-warning btn-sm">Edit</a>
+                <a href="/admin/license/{{ license.id }}/delete" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
