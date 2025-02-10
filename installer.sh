@@ -18,10 +18,10 @@ sudo ufw allow 5000
 echo "y" | sudo ufw enable
 
 # Pindah ke Direktori Web
-WEB_DIR="/var/www/html/badutstream"
+WEB_DIR="/var/www/html/badutpanel"
 if [ ! -d "$WEB_DIR" ]; then
     echo "Cloning repository..."
-    sudo git clone https://github.com/orlin24/badutstream.git "$WEB_DIR"
+    sudo git clone https://github.com/orlin24/badutpanel.git "$WEB_DIR"
 else
     echo "Repository already exists, pulling latest changes..."
     cd "$WEB_DIR" && sudo git pull
