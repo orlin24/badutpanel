@@ -54,7 +54,7 @@ def create_admin_app(app):
             licenses = License.query.filter(License.ip_address.contains(search_ip)).all()
         else:
             licenses = License.query.all()
-        return render_template('license_list.html', licenses=licenses)
+        return render_template('license_list.html', licenses=licenses, search_ip=search_ip)
 
     @app.route('/admin/license/new', methods=['GET', 'POST'], endpoint='new_license')
     @login_required
