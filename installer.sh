@@ -48,4 +48,5 @@ pip install --upgrade pip
 pip install flask flask_cors Flask Flask-Admin flask-login Flask-SQLAlchemy Flask-Migrate Flask-Dotenv Flask-Limiter python-dotenv
 
 echo "Starting application..."
+tmux
 python3 app.py
