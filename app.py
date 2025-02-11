@@ -18,7 +18,7 @@ def create_app():
 
     @app.route('/')
     def home():
-        return redirect(url_for('license_list'))
+        return render_template('layout.html')
 
     return app
 
