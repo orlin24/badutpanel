@@ -18,6 +18,6 @@ def create_api_app(app):
         license = License.query.filter_by(license_key=license_key, ip_address=ip_address).first()
 
         if license and license.is_valid():
-            return jsonify({"status": "valid"}), 200
+            return jsonify({"valid": True, "expiry_date": license.active_until.isoformat()}), 200
         else:
-            return jsonify({"status": "invalid"}), 403
+            return jsonify({"valid": False}), 403
