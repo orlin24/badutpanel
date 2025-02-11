@@ -5,14 +5,27 @@ from models import db, License
 from config import config
 from datetime import datetime
 from functools import wraps
+from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user, login_required
 
 # Dummy credentials for demonstration
 USERNAME = 'admin'
 PASSWORD = 'internet'
 
+# User model for authentication
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
+
 def create_admin_app(app):
     admin = Admin(app, name='License Admin', template_mode='bootstrap4')
     admin.add_view(ModelView(License, db.session))
+
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User(user_id)
 
     @app.route('/login', methods=['GET', 'POST'])
     def login():
@@ -21,7 +34,8 @@ def create_admin_app(app):
             username = request.form['username']
             password = request.form['password']
             if username == USERNAME and password == PASSWORD:
-                session['logged_in'] = True
+                user = User(id=1)
+                login_user(user)
                 return redirect(url_for('license_list'))
             else:
                 error = 'Invalid Credentials. Please try again.'
@@ -29,16 +43,8 @@ def create_admin_app(app):
 
     @app.route('/logout')
     def logout():
-        session.pop('logged_in', None)
+        logout_user()
         return redirect(url_for('login'))
-
-    def login_required(f):
-        @wraps(f)
-        def wrap(*args, **kwargs):
-            if not session.get('logged_in'):
-                return redirect(url_for('login'))
-            return f(*args, **kwargs)
-        return wrap
 
     @app.route('/admin/license')
     @login_required
