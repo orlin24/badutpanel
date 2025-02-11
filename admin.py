@@ -8,7 +8,7 @@ from functools import wraps
 
 # Dummy credentials for demonstration
 USERNAME = 'admin'
-PASSWORD = 'password'
+PASSWORD = 'internet'
 
 def create_admin_app(app):
     admin = Admin(app, name='License Admin', template_mode='bootstrap4')
