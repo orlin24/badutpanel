@@ -1,31 +1,47 @@
-{% extends "layout.html" %}
-
-{% block content %}
-<h1>Daftar Lisensi</h1>
-<a href="/admin/license/new" class="btn btn-primary mb-3">Tambah Lisensi</a>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>IP Address</th>
-            <th>License Key</th>
-            <th>Active Until</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for license in licenses %}
-        <tr>
-            <td>{{ license.id }}</td>
-            <td>{{ license.ip_address }}</td>
-            <td>{{ license.license_key }}</td>
-            <td>{{ license.active_until }}</td>
-            <td>
-                <a href="/admin/license/{{ license.id }}/edit" class="btn btn-warning btn-sm">Edit</a>
-                <a href="/admin/license/{{ license.id }}/delete" class="btn btn-danger btn-sm">Delete</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>License List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>License List</h2>
+        <form method="GET" action="{{ url_for('license_list') }}" class="form-inline mb-3">
+            <div class="form-group">
+                <label for="search_ip" class="mr-2">Search by IP:</label>
+                <input type="text" class="form-control mr-2" id="search_ip" name="search_ip" placeholder="Enter IP Address" value="{{ request.args.get('search_ip', '') }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+        <a href="{{ url_for('new_license') }}" class="btn btn-success mb-3">Add New License</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>IP Address</th>
+                    <th>License Key</th>
+                    <th>Active Until</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for license in licenses %}
+                <tr>
+                    <td>{{ license.id }}</td>
+                    <td>{{ license.ip_address }}</td>
+                    <td>{{ license.license_key }}</td>
+                    <td>{{ license.active_until }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_license', id=license.id) }}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{{ url_for('delete_license', id=license.id) }}" class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
