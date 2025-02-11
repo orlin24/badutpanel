@@ -45,7 +45,7 @@ echo "Creating virtual environment and installing Python packages..."
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install flask flask_cors Flask Flask-Admin Flask-SQLAlchemy Flask-Migrate Flask-Dotenv Flask-Limiter python-dotenv
+pip install flask flask_cors Flask Flask-Admin flask-login Flask-SQLAlchemy Flask-Migrate Flask-Dotenv Flask-Limiter python-dotenv
 
 echo "Starting application..."
 python3 app.py
