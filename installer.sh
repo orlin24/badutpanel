@@ -65,7 +65,8 @@ echo "Creating virtual environment and installing dependencies..."
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
-pip install flask flask_cors gdown
+# Menggunakan file requirements.txt untuk menginstal dependencies
+pip install -r requirements.txt
 
 # -------------------------------
 # Jalankan Aplikasi di dalam tmux session awal (default: badutsreamfinal)
@@ -180,6 +181,10 @@ echo ""
 # Tampilkan informasi kontak dalam teks besar
 figlet "Tools: BadutStream Yt" | lolcat
 figlet "Kontak: https://t.me/joss_ganteng" | lolcat
+echo ""
+# Tampilkan Running on http://IP-VPS:5000
+IP=\$(curl -s ifconfig.me)
+figlet "Running on http://\$IP:5000" | lolcat
 echo ""
 # Pesan untuk menjalankan menu
 echo "Untuk menjalankannya, cukup ketik 'menu.sh' di terminal." | lolcat
